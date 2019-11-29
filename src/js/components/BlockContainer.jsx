@@ -6,10 +6,14 @@ class BlockContainer extends React.Component {
         super();
 
         this.state = {
-            me: ''
+            me: 'be'
         };
-        // this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.id]: event.target.value });
     }
 
     // click = (event) => {
@@ -24,7 +28,7 @@ class BlockContainer extends React.Component {
                 <input
                     className="form-control"
                     defaultValue={me}
-                // onChange={this.handleChange}
+                    onChange={this.handleChange}
                 />
                 <a href="#" className="me" onClick={click}>Click me</a>
             </div>
@@ -39,6 +43,3 @@ let click = (event) => {
 
 
 export default BlockContainer;
-
-// const wrapper = document.getElementById("block-container");
-// wrapper ? ReactDom.render(<BlockContainer />, wrapper) : false;
