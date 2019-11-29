@@ -29,6 +29,10 @@
     &__link:hover {
         background-color: rgba($color: $color-primary, $alpha: .7);
     }
+
+    &__link + .active {
+        background-color: rgba($color: $color-primary, $alpha: .4);
+    }
 }
 
 .footer {}
