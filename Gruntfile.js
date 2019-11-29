@@ -68,7 +68,7 @@ module.exports = function (grunt) {
             },
             scss: {
                 src: [
-                    'src/scss/components/*.scss',
+                    'src/scss/components/**/*.scss',
                 ],
                 dest: 'src/scss/main.scss',
             }
