@@ -22,17 +22,19 @@ module.exports = function (grunt) {
                     transform: [
                         ['babelify',
                             {
-                                presets:
-                                    [
-                                        ["@babel/preset-env", { modules: 'auto' }],
-                                        "@babel/preset-react"
-                                    ],
+                                presets: [
+                                    ["@babel/preset-env", {
+                                        modules: 'auto'
+                                    }],
+                                    "@babel/preset-react"
+                                ],
                                 plugins: [
                                     "@babel/plugin-transform-react-jsx",
                                     "@babel/plugin-proposal-class-properties"
                                 ]
                             }
-                        ]],
+                        ]
+                    ],
                     browserifyOptions: {
                         debug: true
                     }
@@ -55,7 +57,10 @@ module.exports = function (grunt) {
         },
         concat: {
             options: {
-                separator: '//=============NEW FILE=============',
+                // separator: '//=============NEW FILE=============',
+                process: function (src, filepath) {
+                    return '//####' + filepath + '\n' + src;
+                }
             },
             js: {
                 src: [].concat(['src/*.js', 'src/js/components/*.jsx']),
