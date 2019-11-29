@@ -58,7 +58,7 @@ module.exports = function (grunt) {
                     'distr/static/js/bundle.js': 'src/js/index.jsx'
                 },
                 options: {
-                    transform: [['babelify', { presets: [["@babel/preset-env", { modules: 'auto' }], "@babel/preset-react"] }]],
+                    transform: [['babelify', { presets: [["@babel/preset-env", { modules: 'auto' }], "@babel/preset-react"], plugins: ["@babel/plugin-transform-react-jsx"] }]],
                     browserifyOptions: {
                         debug: true
                     }
@@ -67,30 +67,17 @@ module.exports = function (grunt) {
         },
         watch: {
             css: {
-                files: ['src/js/**/*'],
+                files: ['src/scss/**/*', '!src/scss/main.scss'],
                 tasks: ['sass-simple'],
-
-                // options: {
-                //     livereload: 1337
-                // },
             },
             js: {
-                files: ['src/scss/**/*'],
-                tasks: ['browserify:dist'],
-
-                // options: {
-                //     livereload: 1337
-                // },
+                files: ['src/js/**/*'],
+                tasks: ['jsx-simple'],
             },
             html: {
                 files: ['src/index.html'],
                 tasks: ['copy:html'],
-
-                // options: {
-                //     livereload: 1337
-                // },
-            }
-
+            },
         },
         concat: {
             options: {
@@ -108,7 +95,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            bundle: ['src/js/bundle.jsx']
+            // bundle: ['src/js/bundle.jsx'],
+            scss: ['src/scss/main.scss']
         },
         copy: {
             html: {
@@ -134,6 +122,7 @@ module.exports = function (grunt) {
 
     // grunt.registerTask('concatJS', ['clean:bundle', 'concat:js']);
     // grunt.registerTask('sass-babel', ['sass', 'babel']);
-    grunt.registerTask('sass-simple', ['concat:scss', 'sass']);
-    grunt.registerTask('grunt-watch', ['sass-simple', 'browserify:dist']);
+    grunt.registerTask('sass-simple', ['concat:scss', 'sass', 'clean:scss']);
+    grunt.registerTask('jsx-simple', ['browserify:dist']);
+    // grunt.registerTask('grunt-watch', ['sass-simple', 'browserify:dist']);
 }
