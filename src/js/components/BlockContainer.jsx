@@ -16,10 +16,10 @@ class BlockContainer extends React.Component {
         this.setState({ [event.target.id]: event.target.value });
     }
 
-    // click = (event) => {
-    //     console.log(event.target);
-    //     alert("Hello again");
-    // }
+    click(event) {
+        console.log(event.target);
+        alert("Hello again");
+    }
 
     render() {
         const { me } = this.state;
@@ -30,7 +30,7 @@ class BlockContainer extends React.Component {
                     defaultValue={me}
                     onChange={this.handleChange}
                 />
-                <a href="#" className="me" onClick={click}>Click me</a>
+                <a href="#" className="me" onClick={this.click}>Click me</a>
             </div>
         );
     }
