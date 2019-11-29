@@ -21,4 +21,4 @@ Input.propTypes = {
     value: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired
 };
-export default Input
+export default Input;

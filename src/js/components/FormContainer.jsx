@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import Input from "./Input.jsx";
 class FormContainer extends React.Component {
     constructor() {
@@ -24,7 +23,7 @@ class FormContainer extends React.Component {
                     value={seo_title}
                     handleChange={this.handleChange}
                 />
-                <p class="title">{seo_title}</p>
+                <p id="title">{seo_title}</p>
             </form>
         );
     }
@@ -32,5 +31,5 @@ class FormContainer extends React.Component {
 
 export default FormContainer;
 
-const wrapper = document.getElementById("create-article-form");
-wrapper ? ReactDOM.render(<FormContainer />, wrapper) : false;
+// const wrapper = document.getElementById("create-article-form");
+// wrapper ? ReactDOM.render(<FormContainer />, wrapper) : false;

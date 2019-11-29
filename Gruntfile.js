@@ -8,57 +8,31 @@ module.exports = function (grunt) {
                 sourceMap: true
             },
             dist: {
-                // files: [{
-                //     expand: true,
-                //     cwd: 'src/scss/components/',
-                //     src: ['*.scss'],
-                //     dest: 'distr/static/css/',
-                //     ext: '.css'
-                // }]
                 files: {
                     'distr/static/css/main.css': 'src/scss/main.scss'
                 }
             }
         },
-        babel: {
-            options: {
-                plugins: ['@babel/plugin-transform-react-jsx'],
-                presets: [
-                    [
-                        '@babel/preset-env',
-                        {
-                            'modules': false
-                        }
-                    ],
-                    "@babel/preset-react"
-                ],
-                sourceMap: true
-            },
-            dist: {
-                files:
-                    [{
-                        expand: true,
-                        cwd: 'src/js/components/',
-                        src: ['*.jsx'],
-                        dest: 'distr/static/js/',
-                        ext: '.js'
-                    }]
-            }
-        },
         browserify: {
             dist: {
-                // files: [{
-                //     expand: true,
-                //     cwd: 'src/js/components/',
-                //     src: ['*.jsx'],
-                //     dest: 'distr/static/js/',
-                //     ext: '.js'
-                // }],
                 files: {
-                    'distr/static/js/bundle.js': 'src/js/index.jsx'
+                    'distr/static/js/bundle.js': 'src/js/app.jsx'
                 },
                 options: {
-                    transform: [['babelify', { presets: [["@babel/preset-env", { modules: 'auto' }], "@babel/preset-react"], plugins: ["@babel/plugin-transform-react-jsx"] }]],
+                    transform: [
+                        ['babelify',
+                            {
+                                presets:
+                                    [
+                                        ["@babel/preset-env", { modules: 'auto' }],
+                                        "@babel/preset-react"
+                                    ],
+                                plugins: [
+                                    "@babel/plugin-transform-react-jsx",
+                                    "@babel/plugin-proposal-class-properties"
+                                ]
+                            }
+                        ]],
                     browserifyOptions: {
                         debug: true
                     }
@@ -95,7 +69,6 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            // bundle: ['src/js/bundle.jsx'],
             scss: ['src/scss/main.scss']
         },
         copy: {
@@ -104,7 +77,7 @@ module.exports = function (grunt) {
                 dest: 'distr/index.html'
             }
         }
-    })
+    });
 
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-babel');
@@ -120,9 +93,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['clean:bundle']);
     grunt.registerTask('default', ['browserify:dist']);
 
-    // grunt.registerTask('concatJS', ['clean:bundle', 'concat:js']);
-    // grunt.registerTask('sass-babel', ['sass', 'babel']);
     grunt.registerTask('sass-simple', ['concat:scss', 'sass', 'clean:scss']);
     grunt.registerTask('jsx-simple', ['browserify:dist']);
-    // grunt.registerTask('grunt-watch', ['sass-simple', 'browserify:dist']);
-}
+    // grunt.registerTask('grunt-watch', ['sass-simple', 'jsx-simple']);
+};
