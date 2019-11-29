@@ -1,6 +1,6 @@
 .container {
     max-width: 120rem;
-    margin: 8rem auto;
+    margin: 1rem auto;
     background-color: $color-primary;
     box-shadow: 0 2rem 6rem rgba($color: #000, $alpha: 0.3);
     height: 100vh;
@@ -35,4 +35,13 @@
     }
 }
 
-.footer {}
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 1rem;
+    margin-top: -1rem;
+    background-color: rgba($color: #000, $alpha: 0.3);
+}
