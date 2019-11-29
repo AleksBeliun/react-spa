@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 import FormContainer from "./components/FormContainer.jsx";
 import BlockContainer from "./components/BlockContainer.jsx";
+import BlogList from "./components/blog/blog-list.jsx";
 
 class App extends Component {
     constructor() {
@@ -11,7 +12,7 @@ class App extends Component {
     render() {
         return (
             <div className="container" >
-                <div className="row mt-5">
+                {/* <div className="row mt-5">
                     <div className="col-md-4 offset-md-1">
                         <p>Create a new article</p>
                         <div id="create-article-form">
@@ -22,7 +23,8 @@ class App extends Component {
                     <div id="block-container">
                         <BlockContainer />
                     </div>
-                </div>
+                </div> */}
+                <BlogList />
             </div>
         );
     }
