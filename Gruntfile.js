@@ -66,10 +66,31 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            dev: {
-                files: ['src/**/*'],
-                tasks: ['grunt-watch']
+            css: {
+                files: ['src/js/**/*'],
+                tasks: ['sass-simple'],
+
+                // options: {
+                //     livereload: 1337
+                // },
+            },
+            js: {
+                files: ['src/scss/**/*'],
+                tasks: ['browserify:dist'],
+
+                // options: {
+                //     livereload: 1337
+                // },
+            },
+            html: {
+                files: ['src/index.html'],
+                tasks: ['copy:html'],
+
+                // options: {
+                //     livereload: 1337
+                // },
             }
+
         },
         concat: {
             options: {
@@ -88,6 +109,12 @@ module.exports = function (grunt) {
         },
         clean: {
             bundle: ['src/js/bundle.jsx']
+        },
+        copy: {
+            html: {
+                src: 'src/index.html',
+                dest: 'distr/index.html'
+            }
         }
     })
 
@@ -97,6 +124,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default', ['sass']);
     grunt.registerTask('default', ['babel']);

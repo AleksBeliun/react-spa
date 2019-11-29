@@ -13,7 +13,6 @@ class FormContainer extends React.Component {
         this.setState({ [event.target.id]: event.target.value });
     }
     render() {
-        let thi = 0;
         const { seo_title } = this.state;
         return (
             <form id="article-form">
@@ -25,6 +24,7 @@ class FormContainer extends React.Component {
                     value={seo_title}
                     handleChange={this.handleChange}
                 />
+                <p class="title">{seo_title}</p>
             </form>
         );
     }
