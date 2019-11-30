@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 class BlogListItem extends Component {
     constructor(props) {
         super(props);
-        const { id } = this.props;
-        console.log(id);
+        const { id, blogItem } = this.props;
+        let { value } = this.props;
+        console.log('BlogListItem ID: ', id);
+        console.log('BlogListItem value: ', value);
+        console.log('BlogListItem : ', blogItem);
     }
 
     render() {
