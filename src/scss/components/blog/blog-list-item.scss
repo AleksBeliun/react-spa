@@ -1,4 +1,38 @@
 .blog-list-item {
+    display: flex;
+    flex-direction: column;
     margin: 2rem;
-    background-color: rgba($color: #000000, $alpha: .3);
+    background-color: rgba($color: #000000, $alpha: 0.3);
+
+    &-element {}
+
+    &-controls {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid orangered;
+
+        &__button-save {}
+
+        &__button-delete {}
+    }
+}
+
+.btn {
+    text-transform: uppercase;
+    border: none;
+    display: inline-block;
+    background-color: $color-primary-dark;
+    border-radius: 0;
+    transition: all .2s;
+    
+    cursor: pointer;
+
+    &:hover {
+        color: white;
+        background-color: rgba($color: $color-primary-light, $alpha: .8);
+    }
+
+    &:focus {
+        outline: none;
+    }
 }

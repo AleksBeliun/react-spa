@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 
 class BlogListItem extends Component {
+    constructor(props) {
+        super(props);
+        const { id } = this.props;
+        console.log(id);
+    }
+
     render() {
+        const { value, onClickSave, onClickDelete } = this.props;
         return (
             <div className="blog-list-item">
-             <p>hello 1</p>
-             <p>hello 2</p>
-             <p>hello 3</p>
+                <div className="blog-list-item-element">
+                    <p>Hello Component {value}</p>
+                </div>
+                <div className="blog-list-item-controls">
+                    <button className="blog-list-item-controls__button-save btn" onClick={onClickSave}>Save</button>
+                    <button className="blog-list-item-controls__button-delete btn" onClick={onClickDelete}>Delete</button>
+                </div>
             </div>
         );
     }
+
+
 
 }
 
