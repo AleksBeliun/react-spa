@@ -92,7 +92,7 @@ function BlogList(props) {
         name: '',
         type: ''
     };
-    const [blogItems, setBlogItems] = useState([{}, {}, {}]);
+    const [blogItems, setBlogItems] = useState([]);
 
     const clickAdd = (event) => {
         console.log('Added');
@@ -104,55 +104,39 @@ function BlogList(props) {
         //     blogItems: [...blogItems, <BlogListItem />]
         // });
         setBlogItems(blogItems.concat({ name: 'Rich Text Editor', type: 'rich-text-editor' }));
-        console.log(blogItems);
+        // console.log('Current blog items: ', blogItems);
     };
 
-    const clickSave = (event, id, blogItem) => {
-        console.log('Saved ' + id);
+    const clickCheckState = (event) => {
+        console.log('Current blog items: ', blogItems);
+    };
 
-        // this.setState(prevState => ({
-        //     blogItems: {
-        //         ...prevState.blogItems,
-        //         [prevState.blogItems[id]]: blogItem
-        //     }
-        // }));
+    const clickSave = (event, index, blogItem) => {
+        console.log('Saved ' + index);
 
-        // this.counter();
-        // console.log(this.state.counter);
+        setBlogItems(blogItems.map((item, i) => item[index] = blogItem));
 
-        // this.setState(
-        //     this.state.blogItems[id] = blogItem
-        // );
-
-        this.setState(state => {
-            const list = state.blogItems.map(item => item[id] = blogItem);
-            return list;
-        });
-
-
-        // this.setState({
-        //     blogItems: [...this.state.blogItems,]
-        // });
-        console.log(this.state.blogItems);
+        // console.log(blogItems);
 
     };
 
-    const clickDelete = (event, id) => {
-        console.log('Deleted ' + id);
+    const clickDelete = (event, index) => {
+        console.log('Deleted ' + index);
+        // setBlogItems(blogItems.splice(id, 1));
+        // console.log('Filtered: ', blogItems.filter((item, i) => i !== index));
+        setBlogItems(blogItems.filter((item, i) => i !== index));
 
-        setBlogItems(blogItems.splice(id, 1));
-
-        console.log(blogItems);
+        // console.log(blogItems);
     };
 
     return (
         <>
-            <BlogItemPanel onClickAdd={(e) => clickAdd(e)} />
+            <BlogItemPanel onClickAdd={(e) => clickAdd(e)} onClickCheckState={(e) => clickCheckState(e)} />
             {blogItems.length > 0 ? <div className="blog-list">
                 {blogItems.map((blogItem, index) => (
                     <BlogListItem
                         key={index}
-                        id={index}
+                        index={index}
                         blogElement={blogItem}
                         onClickDelete={(e) => clickDelete(e, index)}
                         onClickSave={(e) => clickSave(e, index, blogItem)}

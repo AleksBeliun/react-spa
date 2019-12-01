@@ -5,8 +5,8 @@ import RichTextEditor from './elements/rich-text-editor.jsx';
 class BlogListItem extends Component {
     constructor(props) {
         super(props);
-        const { id, blogElement } = this.props;
-        console.log('BlogListItem ID: ', id);
+        const { index, blogElement } = this.props;
+        console.log('BlogListItem Index: ', index);
         console.log('BlogListItem : ', blogElement);
     }
 
