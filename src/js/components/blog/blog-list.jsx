@@ -92,10 +92,12 @@ function BlogList(props) {
     const blogItem = {
         name: '',
         type: '',
-        state: {}
+        state: ''
     };
 
-    const [blogItems, setBlogItems] = useState([]);
+    const [blogItems, setBlogItems] = useState([
+        { name: 'Default Name', type: 'rich-text-editor', state: "<p>Default Text</p>" }
+    ]);
 
     const saveListItemState = (data, index) => {
         setBlogItems(blogItems.map((item, i) => {
@@ -124,13 +126,15 @@ function BlogList(props) {
         console.log('Current blog items: ', blogItems);
     };
 
-    const clickSave = (event, index, blogItem, cb) => {
+    const clickSave = (event, index, blogItem) => {
         console.log('Saved ' + index);
 
-        // setBlogItems(blogItems.map((item, i) => item[index] = blogItem));
+        setBlogItems(blogItems.map((item, i) => {
+            // console.log(`Item ${i}`, item);
+            i !== index ? null : item.state = blogItem.state;
+            return item;
+        }));
         console.log(blogItem);
-
-        cb(blogItem, index);
 
     };
 
@@ -152,14 +156,12 @@ function BlogList(props) {
                         blogItem={blogItem}
                         saveListItemState={saveListItemState}
                         onClickDelete={(e) => clickDelete(e, index)}
-                        onClickSave={(e) => clickSave(e, index, blogItem, saveListItemState)}
+                        onClickSave={(e) => clickSave(e, index, blogItem)}
                     />
                 ))}
             </div> : <div>No Items in the list</div>}
         </>
     );
 }
-
-
 
 export default BlogList;
