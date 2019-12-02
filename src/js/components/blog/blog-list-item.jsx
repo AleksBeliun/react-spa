@@ -5,17 +5,19 @@ import RichTextEditor from './elements/rich-text-editor.jsx';
 class BlogListItem extends Component {
     constructor(props) {
         super(props);
-        const { index, blogElement } = this.props;
-        console.log('BlogListItem Index: ', index);
-        console.log('BlogListItem : ', blogElement);
     }
 
     render() {
-        const { blogElement, onClickSave, onClickDelete } = this.props;
+        const { index, blogItem, onClickSave, onClickDelete, saveListItemState } = this.props;
         return (
             <div className="blog-list-item">
                 <div className="blog-list-item-element">
-                    {blogElement.type === 'rich-text-editor' ? <RichTextEditor name={blogElement.name} /> : <p>Nothing to see here</p>}
+                    {blogItem.type === 'rich-text-editor' ?
+                        <RichTextEditor
+                            index={index}
+                            name={blogItem.name}
+                            data={blogItem.state}
+                            saveListItemState={saveListItemState} /> : <p>Nothing to see here</p>}
                 </div>
                 <div className="blog-list-item-controls">
                     <button className="blog-list-item-controls__button-save btn" onClick={onClickSave}>Save</button>

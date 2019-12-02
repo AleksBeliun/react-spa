@@ -88,45 +88,58 @@ import BlogItemPanel from './blog-item-panel.jsx';
 // }
 
 function BlogList(props) {
-    const blogElement = {
+    const blogItem = {
         name: '',
-        type: ''
+        type: '',
+        state: {}
     };
+
     const [blogItems, setBlogItems] = useState([]);
 
+    const saveListItemState = (data, index) => {
+        // setBlogItems(blogItems.map((item, i) => {
+        //     console.log(`Item ${i}`, item);
+        //     // i === index ? item.state = data : item.state = {};
+        //     if (i === index) {
+        //         console.log('callback item: ', blogItems[i].state);
+        //     }
+        // }));
+        const tempItems = blogItems.map(item => item);
+        for (let i = 0; i < tempItems.length; i++) {
+            if (i === index) {
+                console.log('callback item: ', tempItems[i]);
+                tempItems[i].state = data;
+                setBlogItems(tempItems.map(item => item));
+            }
+        }
+        console.log('callback: ', blogItems);
+    };
+
+
     const clickAdd = (event) => {
-        console.log('Added');
-        // this.setState(state => {
-        //     const list = state.blogItems.push(<BlogListItem />);
-        //     return list;
-        // });
-        // setBlogItems({
-        //     blogItems: [...blogItems, <BlogListItem />]
-        // });
-        setBlogItems(blogItems.concat({ name: 'Rich Text Editor', type: 'rich-text-editor' }));
-        // console.log('Current blog items: ', blogItems);
+        console.log('Added new Blog Item');
+
+        setBlogItems(blogItems.concat({ name: 'Rich Text Editor', type: 'rich-text-editor', state: "" }));
     };
 
     const clickCheckState = (event) => {
         console.log('Current blog items: ', blogItems);
     };
 
-    const clickSave = (event, index, blogItem) => {
+    const clickSave = (event, index, blogItem, cb) => {
         console.log('Saved ' + index);
 
-        setBlogItems(blogItems.map((item, i) => item[index] = blogItem));
+        // setBlogItems(blogItems.map((item, i) => item[index] = blogItem));
+        console.log(blogItem);
 
-        // console.log(blogItems);
-
+        // cb(blogItem, index);
     };
 
     const clickDelete = (event, index) => {
         console.log('Deleted ' + index);
-        // setBlogItems(blogItems.splice(id, 1));
-        // console.log('Filtered: ', blogItems.filter((item, i) => i !== index));
+
         setBlogItems(blogItems.filter((item, i) => i !== index));
 
-        // console.log(blogItems);
     };
 
     return (
@@ -137,9 +150,10 @@ function BlogList(props) {
                     <BlogListItem
                         key={index}
                         index={index}
-                        blogElement={blogItem}
+                        blogItem={blogItem}
+                        saveListItemState={saveListItemState}
                         onClickDelete={(e) => clickDelete(e, index)}
-                        onClickSave={(e) => clickSave(e, index, blogItem)}
+                        onClickSave={(e) => clickSave(e, index, blogItem, cbBlogItemState)}
                     />
                 ))}
             </div> : <div>No Items in the list</div>}
