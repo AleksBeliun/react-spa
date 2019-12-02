@@ -1,94 +1,9 @@
 import React, { Component, useState } from 'react';
-
+import { connect } from 'react-redux';
 import BlogListItem from './blog-list-item.jsx';
 import BlogItemPanel from './blog-item-panel.jsx';
 
-import fs from 'fs';
-// class BlogList extends Component {
-
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             // blogItems: [<BlogListItem />, <BlogListItem />, <BlogListItem />],
-//             blogItems: []
-//         };
-//     }
-
-//     render() {
-//         return (
-//             <>
-//                 <BlogItemPanel onClickAdd={(e) => this.clickAdd(e)} />
-//                 {this.state.blogItems.length > 0 ? <div className="blog-list">
-//                     {this.state.blogItems.map((blogItem, index) => (
-//                         <BlogListItem
-//                             key={index}
-//                             id={index}
-//                             value={index + 1}
-//                             blogItem={blogItem}
-//                             onClickDelete={(e) => this.clickDelete(e, index)}
-//                             onClickSave={(e) => this.clickSave(e, index, blogItem)}
-//                         />
-//                     ))}
-//                 </div> : <div>No Items in the list</div>}
-//             </>
-//         );
-//     }
-
-//     clickAdd = (event) => {
-//         console.log('Added');
-//         this.setState(state => {
-//             const list = state.blogItems.push(<BlogListItem />);
-//             return list;
-//         });
-//         console.log(this.state.blogItems);
-//     }
-
-//     clickSave = (event, id, blogItem) => {
-//         console.log('Saved ' + id);
-
-//         // this.setState(prevState => ({
-//         //     blogItems: {
-//         //         ...prevState.blogItems,
-//         //         [prevState.blogItems[id]]: blogItem
-//         //     }
-//         // }));
-
-//         // this.counter();
-//         // console.log(this.state.counter);
-
-//         // this.setState(
-//         //     this.state.blogItems[id] = blogItem
-//         // );
-
-//         this.setState(state => {
-//             const list = state.blogItems.map(item => item[id] = blogItem);
-//             return list;
-//         });
-
-
-//         // this.setState({
-//         //     blogItems: [...this.state.blogItems,]
-//         // });
-//         console.log(this.state.blogItems);
-
-//     }
-
-//     clickDelete(event, id) {
-//         console.log('Deleted ' + id);
-
-//         if (id > -1) {
-//             this.setState(state => {
-//                 const list = state.blogItems.splice(id, 1);
-//                 return list;
-//             });
-//         }
-
-//         console.log(this.state.blogItems);
-
-//     }
-// }
-
-function BlogList(props) {
+function ConBlogList(props) {
     const blogItem = {
         name: '',
         type: '',
@@ -98,6 +13,7 @@ function BlogList(props) {
     const [blogItems, setBlogItems] = useState([
         { name: 'Default Name', type: 'rich-text-editor', state: "<p>Default Text</p>" }
     ]);
+
 
     const saveListItemState = (data, index) => {
         setBlogItems(blogItems.map((item, i) => {
@@ -120,6 +36,7 @@ function BlogList(props) {
         console.log('Added new Blog Item');
 
         setBlogItems(blogItems.concat({ name: 'Rich Text Editor', type: 'rich-text-editor', state: "" }));
+        // useDispatch({type: });
     };
 
     const clickCheckState = (event) => {
@@ -164,4 +81,10 @@ function BlogList(props) {
     );
 }
 
+const mapStateToProps = state => {
+    return { blogItems: state.blogItems };
+};
+
+
+const BlogList = connect(mapStateToProps)(ConBlogList);
 export default BlogList;

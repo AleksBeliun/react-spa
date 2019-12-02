@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import blogListItems from './components/blog/reducers/list-item-reducer.jsx';
 
 import BlogList from "./components/blog/blog-list.jsx";
+
+const store = createStore(blogListItems);
 
 class App extends Component {
     constructor() {
@@ -9,9 +15,11 @@ class App extends Component {
     }
     render() {
         return (
-            <div className="container" >
-                <BlogList />
-            </div>
+            <Provider store={store}>
+                <div className="container" >
+                    <BlogList />
+                </div>
+            </Provider>
         );
     }
 }
