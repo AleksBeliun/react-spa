@@ -99,8 +99,8 @@ function BlogList(props) {
 
     const saveListItemState = (data, index) => {
         setBlogItems(blogItems.map((item, i) => {
-            console.log(`Item ${i}`, item);
-            i === index ? item.state = data : item.state = {};
+            // console.log(`Item ${i}`, item);
+            i !== index ? null : item.state = data;
             return item;
         }));
         // const tempItems = blogItems.map(item => item);
