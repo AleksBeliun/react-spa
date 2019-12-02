@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import BlogListItem from './blog-list-item.jsx';
 import BlogItemPanel from './blog-item-panel.jsx';
 
-function ConBlogList(props) {
+import { ADD_LIST_ITEM } from './actions/list-item-actions.jsx';
+
+function BlogList(props) {
     const blogItem = {
         name: '',
         type: '',
@@ -81,10 +83,22 @@ function ConBlogList(props) {
     );
 }
 
-const mapStateToProps = state => {
-    return { blogItems: state.blogItems };
+// const mapStateToProps = state => {
+//     return { blogItems: state.blogItems };
+
+// };
+
+const mapStateToProps = state => ({
+    ...state
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onClickAdd: () => dispatch({type: 'ADD_LIST_ITEM', payload: { name: 'Rich Text Editor', type: 'rich-text-editor', state: "" }}),
+        onClickSave: () => dispatch(),
+        onClickDelete: () => dispatch()
+    };
 };
 
 
-const BlogList = connect(mapStateToProps)(ConBlogList);
-export default BlogList;
+export default connect(mapStateToProps, mapDispatchToProps)(BlogList);
