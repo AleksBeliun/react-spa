@@ -12,7 +12,7 @@ const RichTextEditor = ({ index, name, dataToInit, saveListItemState }) => {
                 data={dataToInit}
                 onInit={editor => {
                     // You can store the "editor" and use when it is needed.
-                    console.log('Editor Data', dataToInit);
+                    console.log('Editor Data', editor.getData());
                     console.log('Editor is ready to use!', editor);
                 }}
                 onChange={(event, editor) => {

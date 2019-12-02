@@ -3,6 +3,7 @@ import React, { Component, useState } from 'react';
 import BlogListItem from './blog-list-item.jsx';
 import BlogItemPanel from './blog-item-panel.jsx';
 
+import fs from 'fs';
 // class BlogList extends Component {
 
 //     constructor(props) {
@@ -97,24 +98,21 @@ function BlogList(props) {
     const [blogItems, setBlogItems] = useState([]);
 
     const saveListItemState = (data, index) => {
-        // setBlogItems(blogItems.map((item, i) => {
-        //     console.log(`Item ${i}`, item);
-        //     // i === index ? item.state = data : item.state = {};
+        setBlogItems(blogItems.map((item, i) => {
+            console.log(`Item ${i}`, item);
+            i === index ? item.state = data : item.state = {};
+            return item;
+        }));
+        // const tempItems = blogItems.map(item => item);
+        // for (let i = 0; i < tempItems.length; i++) {
         //     if (i === index) {
-        //         console.log('callback item: ', blogItems[i].state);
+        //         console.log('callback item: ', tempItems[i]);
+        //         tempItems[i].state = data;
+        //         setBlogItems(tempItems.map(item => item));
         //     }
-        // }));
-        const tempItems = blogItems.map(item => item);
-        for (let i = 0; i < tempItems.length; i++) {
-            if (i === index) {
-                console.log('callback item: ', tempItems[i]);
-                tempItems[i].state = data;
-                setBlogItems(tempItems.map(item => item));
-            }
-        }
-        console.log('callback: ', blogItems);
+        // }
+        // console.log('callback: ', blogItems);
     };
-
 
     const clickAdd = (event) => {
         console.log('Added new Blog Item');
@@ -132,7 +130,8 @@ function BlogList(props) {
         // setBlogItems(blogItems.map((item, i) => item[index] = blogItem));
         console.log(blogItem);
 
-        // cb(blogItem, index);
+        cb(blogItem, index);
+
     };
 
     const clickDelete = (event, index) => {
@@ -153,7 +152,7 @@ function BlogList(props) {
                         blogItem={blogItem}
                         saveListItemState={saveListItemState}
                         onClickDelete={(e) => clickDelete(e, index)}
-                        onClickSave={(e) => clickSave(e, index, blogItem, cbBlogItemState)}
+                        onClickSave={(e) => clickSave(e, index, blogItem, saveListItemState)}
                     />
                 ))}
             </div> : <div>No Items in the list</div>}
