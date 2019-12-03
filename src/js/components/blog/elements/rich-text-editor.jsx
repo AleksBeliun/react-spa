@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const RichTextEditor = ({ index, name, dataToInit, saveListItemState }) => {
+const RichTextEditor = ({ index, name, data, saveListItemState }) => {
     return (
         <>
             <p>Rich text editor here: {name}</p>
             <CKEditor
                 editor={ClassicEditor}
                 // data="<p>Hello from CKEditor 5!</p>"
-                data={dataToInit}
+                data={data}
                 onInit={editor => {
                     // You can store the "editor" and use when it is needed.
                     console.log('Editor Data', editor.getData());

@@ -24,19 +24,13 @@ const blogListItemsReducer = (state = defaultState, action) => {
         case actionTypes.SAVE_LIST_ITEM:
             return Object.assign({}, state, {
                 ...state,
-                // blogItems: state.blogItems.map((item, i) => item.id !== action.payload.index ? null : item.data = action.payload.data)
-                // blogItems: state.blogItems.map((item, i) => {
-                //     i !== action.index ? null : item.data = action.payload.data;
-                //     return item;
-                // })
                 blogItems: state.blogItems.map(item => {
-                    console.log('Item: ', item);
-                    console.log('actionPayload: ', action.payload.blogItem);
                     if (item.index === action.payload.index) {
-                        item.data = action.payload.blogItem.data;
+                        item.data = action.payload.blogItemData;
                     }
-                    console.log('after payload: ', item);
+                    return item;
                 })
+                // blogItems: state.blogItems.map(item => item.index === action.payload.index ? item.data = action.payload.blogItemData : item)
             });
         default:
             return state;

@@ -14,7 +14,7 @@ class BlogListItem extends Component {
                 <div className="blog-list-item-element">
                     {blogItem.type === 'rich-text-editor' ?
                         <RichTextEditor
-                            index={index}
+                            index={blogItem.index}
                             name={blogItem.name}
                             data={blogItem.data}
                             saveListItemState={saveListItemState} /> : <p>Nothing to see here</p>}
