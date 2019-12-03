@@ -4,8 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const RichTextEditor = ({ index, name, data, saveListItemState }) => {
     return (
-        <>
-            <p>Rich text editor here: {name}</p>
+        <div className="editor">
             <CKEditor
                 editor={ClassicEditor}
                 // data="<p>Hello from CKEditor 5!</p>"
@@ -27,7 +26,7 @@ const RichTextEditor = ({ index, name, data, saveListItemState }) => {
                     console.log('Focus.', editor);
                 }}
             />
-        </>
+        </div>
     );
 };
 

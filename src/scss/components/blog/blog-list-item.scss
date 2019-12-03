@@ -17,6 +17,10 @@
     }
 }
 
+.editor .ck-editor__main .ck-content{
+    min-height: 20rem;
+}
+
 .btn {
     text-transform: uppercase;
     border: none;
@@ -24,12 +28,11 @@
     background-color: $color-primary-dark;
     border-radius: 0;
     transition: all .2s;
-    
     cursor: pointer;
 
     &:hover {
         color: white;
-        background-color: rgba($color: $color-primary-light, $alpha: .8);
+        background-color: rgba($color: $color-primary-light, $alpha: 0.8);
     }
 
     &:focus {
