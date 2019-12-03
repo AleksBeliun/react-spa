@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 // import configureStore from './components/blog/store/store.jsx';
 
-import blogListItemsReducer from './components/blog/reducers/list-item-reducer.jsx';
+import blogListItemsReducer from './components/blog/store/reducers/list-item-reducer.jsx';
 
 import BlogList from "./components/blog/blog-list.jsx";
 
@@ -16,11 +16,9 @@ class App extends Component {
     }
     render() {
         return (
-            <Provider store={store}>
-                <div className="container" >
-                    <BlogList />
-                </div>
-            </Provider>
+            <div className="container" >
+                <BlogList />
+            </div>
         );
     }
 }
@@ -29,4 +27,4 @@ class App extends Component {
 export default App;
 
 const wrapper = document.getElementById("root");
-wrapper ? ReactDOM.render(<App />, wrapper) : false;
+wrapper ? ReactDOM.render(<Provider store={store}><App /></Provider>, wrapper) : false;
