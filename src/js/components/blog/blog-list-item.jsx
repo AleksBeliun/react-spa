@@ -16,7 +16,7 @@ class BlogListItem extends Component {
                         <RichTextEditor
                             index={index}
                             name={blogItem.name}
-                            data={blogItem.state}
+                            data={blogItem.data}
                             saveListItemState={saveListItemState} /> : <p>Nothing to see here</p>}
                 </div>
                 <div className="blog-list-item-controls">

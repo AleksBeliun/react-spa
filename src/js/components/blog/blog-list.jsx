@@ -28,13 +28,6 @@ function BlogList(props) {
     //     // console.log('callback: ', blogItems);
     // };
 
-    // const clickAdd = (event) => {
-    //     console.log('Added new Blog Item');
-
-    //     setBlogItems(blogItems.concat({ name: 'Rich Text Editor', type: 'rich-text-editor', state: "" }));
-    //     // useDispatch({type: });
-    // };
-
     const clickCheckState = (event) => {
         console.log('Current blog items: ', props);
     };
@@ -51,13 +44,6 @@ function BlogList(props) {
 
     // };
 
-    // const clickDelete = (event, index) => {
-    //     console.log('Deleted ' + index);
-
-    //     setBlogItems(blogItems.filter((item, i) => i !== index));
-
-    // };
-
     return (
         <>
             <BlogItemPanel onClickAdd={props.onClickAdd} onClickCheckState={(e) => clickCheckState(e)} />
@@ -67,9 +53,9 @@ function BlogList(props) {
                         key={index}
                         index={index}
                         blogItem={blogItem}
-                        saveListItemState={(e) => props.onClickSave(index, blogItem)}
-                        onClickDelete={(e) => props.onClickDelete(index)}
-                        onClickSave={(e) => props.onClickSave(index, blogItem)}
+                        saveListItemState={(e) => props.onClickSave(blogItem.index, blogItem)}
+                        onClickDelete={(e) => props.onClickDelete(blogItem.index)}
+                        onClickSave={(e) => props.onClickSave(blogItem.index, blogItem)}
                     />
                 ))}
             </div> : <div>No Items in the list</div>}
@@ -90,8 +76,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClickAdd: () => dispatch({ type: actionTypes.ADD_LIST_ITEM, payload: { name: 'Rich Text Editor', type: 'rich-text-editor', state: "" } }),
-        onClickSave: (index, item) => dispatch({ type: actionTypes.SAVE_LIST_ITEM, payload: { index: index, data: data } }),
+        onClickAdd: () => dispatch({ type: actionTypes.ADD_LIST_ITEM, payload: { name: 'Rich Text Editor', type: 'rich-text-editor', data: 'Default Txt', index: Math.floor(1000 + Math.random() * 9000) } }),
+        onClickSave: (index, blogItem) => dispatch({ type: actionTypes.SAVE_LIST_ITEM, payload: { index: index, blogItem: blogItem } }),
         onClickDelete: (index) => dispatch({ type: actionTypes.DELETE_LIST_ITEM, payload: { index: index } })
     };
 };
