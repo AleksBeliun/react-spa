@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/list-item-action-types.jsx';
+import { updateObject } from '../utility.jsx';
 
 const defaultState = {
     blogItems: [{
@@ -12,26 +13,18 @@ const defaultState = {
 const blogListItemsReducer = (state = defaultState, action) => {
     switch (action.type) {
         case actionTypes.ADD_LIST_ITEM:
-            return Object.assign({}, state, {
-                ...state,
-                blogItems: state.blogItems.concat(action.payload)
-            });
+            return updateObject(state, { blogItems: state.blogItems.concat(action.payload) });
         case actionTypes.DELETE_LIST_ITEM:
-            return Object.assign({}, state, {
-                ...state,
-                blogItems: state.blogItems.filter((item, i) => item.index !== action.index)
-            });
+            const updatedArray = state.blogItems.filter((item, i) => item.index !== action.index);
+            return updateObject(state, { blogItems: updatedArray });
         case actionTypes.SAVE_LIST_ITEM:
-            return Object.assign({}, state, {
-                ...state,
-                blogItems: state.blogItems.map(item => {
-                    if (item.index === action.index) {
-                        item.data = action.data;
-                    }
-                    return item;
-                })
-                // blogItems: state.blogItems.map(item => item.index === action.payload.index ? item.data = action.payload.blogItemData : item)
+            const updatedArray2 = state.blogItems.map(item => {
+                if (item.index === action.index) {
+                    item.data = action.data;
+                }
+                return item;
             });
+            return updateObject(state, { blogItems: updatedArray2 });
         default:
             return state;
     }
