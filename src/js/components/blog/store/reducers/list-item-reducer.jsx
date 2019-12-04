@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/list-item-action-creators.jsx';
+import * as actionTypes from '../actions/list-item-action-types.jsx';
 
 const defaultState = {
     blogItems: [{
