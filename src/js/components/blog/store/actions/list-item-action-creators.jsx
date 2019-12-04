@@ -24,3 +24,11 @@ export const saveListItem = (data, index) => {
         index: index
     };
 };
+
+export const saveListItemAsync = (data, index) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(saveListItem(data, index))
+        }, 2000);
+    };
+};

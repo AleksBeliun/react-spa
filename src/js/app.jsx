@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-// import configureStore from './components/blog/store/store.jsx';
+import thunk from 'redux-thunk';
 
 import blogListItemsReducer from './components/blog/store/reducers/list-item-reducer.jsx';
 
@@ -22,7 +22,7 @@ const logger = store => {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(blogListItemsReducer, composeEnhancers(applyMiddleware(logger)));
+const store = createStore(blogListItemsReducer, composeEnhancers(applyMiddleware(logger, thunk)));
 
 class App extends Component {
     constructor() {
