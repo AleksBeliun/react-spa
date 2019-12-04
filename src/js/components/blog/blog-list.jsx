@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BlogListItem from './blog-list-item.jsx';
 import BlogItemPanel from './blog-item-panel.jsx';
 
-import * as actionCreators from './store/actions/list-item-action-creators.jsx';
+import * as actionCreators from './store/actions/list-item-actions.jsx';
 
 function BlogList(props) {
 
