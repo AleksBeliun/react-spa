@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BlogListItem from './blog-list-item.jsx';
 import BlogItemPanel from './blog-item-panel.jsx';
 
-import * as actionTypes from './store/actions/list-item-actions.jsx';
+import * as actionCreators from './store/actions/list-item-action-creators.jsx';
 
 function BlogList(props) {
 
@@ -31,7 +31,7 @@ function BlogList(props) {
                         index={blogItem.index}
                         blogItem={blogItem}
                         saveListItemState={handleDataSave}
-                        onClickDelete={() => handleDataDelete(blogItem.index)}
+                        onClickDelete={() => props.onClickDelete(blogItem.index)}
                         onClickSave={handleDataSave}
                     />
                 ))}
@@ -48,9 +48,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClickAdd: () => dispatch({ type: actionTypes.ADD_LIST_ITEM, payload: { name: 'Rich Text Editor', type: 'rich-text-editor', data: '<p>Default Text</p>', index: Math.floor(1000 + Math.random() * 9000) } }),
-        onClickSave: (blogItemData, index) => dispatch({ type: actionTypes.SAVE_LIST_ITEM, payload: { index: index, blogItemData: blogItemData } }),
-        onClickDelete: (index) => dispatch({ type: actionTypes.DELETE_LIST_ITEM, payload: { index: index } })
+        // onClickAdd: () => dispatch({ type: actionTypes.ADD_LIST_ITEM, payload: { name: 'Rich Text Editor', type: 'rich-text-editor', data: '<p>Default Text</p>', index: Math.floor(1000 + Math.random() * 9000) } }),
+        // onClickSave: (blogItemData, index) => dispatch({ type: actionTypes.SAVE_LIST_ITEM, payload: { index: index, blogItemData: blogItemData } }),
+        onClickAdd: () => dispatch(actionCreators.addListItem({ name: 'Rich Text Editor', type: 'rich-text-editor', data: '<p>Default Text</p>', index: Math.floor(1000 + Math.random() * 9000) })),
+        onClickSave: (blogItemData, index) => dispatch(actionCreators.saveListItem(blogItemData, index)),
+        onClickDelete: (index) => dispatch(actionCreators.deleteListItem(index))
     };
 };
 

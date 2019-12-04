@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/list-item-actions.jsx';
+import * as actionTypes from '../actions/list-item-action-creators.jsx';
 
 const defaultState = {
     blogItems: [{
@@ -19,14 +19,14 @@ const blogListItemsReducer = (state = defaultState, action) => {
         case actionTypes.DELETE_LIST_ITEM:
             return Object.assign({}, state, {
                 ...state,
-                blogItems: state.blogItems.filter((item, i) => item.index !== action.payload.index)
+                blogItems: state.blogItems.filter((item, i) => item.index !== action.index)
             });
         case actionTypes.SAVE_LIST_ITEM:
             return Object.assign({}, state, {
                 ...state,
                 blogItems: state.blogItems.map(item => {
-                    if (item.index === action.payload.index) {
-                        item.data = action.payload.blogItemData;
+                    if (item.index === action.index) {
+                        item.data = action.data;
                     }
                     return item;
                 })
