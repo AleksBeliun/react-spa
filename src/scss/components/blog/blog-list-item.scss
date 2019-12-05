@@ -38,6 +38,18 @@
     }
 
     &:focus {
+        outline: 0;
+    }
+
+    &:active {
+        // outline: none;
+        color: black;
+
+        // outline: none;
+   
+    }
+
+    &:visited {
         outline: none;
     }
 }
